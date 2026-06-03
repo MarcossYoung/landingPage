@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marcos - solo developer · shipped products & AI systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08090B;
+    --bg-2:#0D0F13;
+    --surface:#101218;
+    --surface-2:#161922;
+    --elev:#1B1F29;
+    --line:#23262F;
+    --line-2:#30343F;
+    --txt:#ECEEF1;
+    --txt-2:#A6ABB5;
+    --txt-3:#6B7079;
+    --txt-4:#474B54;
+    --lime:#C6F24E;
+    --lime-dim:#9ABF3A;
+    --cyan:#4FD8D2;
+    --red:#FF5B47;
+    --amber:#FFB454;
+    --green:#5FD08A;
+    --max:80rem;
+    --glow-lime:0 0 0 1px rgba(198,242,78,.35),0 0 24px -6px rgba(198,242,78,.45);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--txt);
+    font-family:"Archivo",sans-serif;font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;background-position:center;
+  }
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(ellipse 90% 60% at 50% -10%,rgba(198,242,78,.05),transparent 60%),
+               radial-gradient(ellipse 70% 50% at 100% 100%,rgba(79,216,210,.04),transparent 60%);}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.14) 3px,rgba(0,0,0,.14) 3px);}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(20px,5vw,64px);position:relative;z-index:2}
+  a{color:inherit}
+  .mono{font-family:"JetBrains Mono",monospace}
+
+  /* ---- status bar ---- */
+  header{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);background:rgba(8,9,11,.82);backdrop-filter:blur(12px)}
+  .bar{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:13px 0;flex-wrap:wrap}
+  .bar .id{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--txt-2);display:flex;align-items:center;gap:11px}
+  .bar .id .live{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:blink 2s ease-in-out infinite}
+  .bar .id b{color:var(--txt);font-weight:700;letter-spacing:.02em}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  .bar nav{display:flex;gap:6px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+  .bar nav a{text-decoration:none;color:var(--txt-3);padding:6px 12px;border:1px solid transparent;border-radius:3px;transition:.18s}
+  .bar nav a:hover{color:var(--txt);border-color:var(--line-2)}
+  .bar nav a.cta{color:var(--bg);background:var(--lime);font-weight:600}
+  .bar nav a.cta:hover{box-shadow:var(--glow-lime);border-color:transparent}
+
+  /* ---- hero ---- */
+  .hero{padding:clamp(64px,12vw,150px) 0 clamp(48px,8vw,96px);position:relative}
+  .readout{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-3);display:flex;gap:22px;flex-wrap:wrap;margin-bottom:34px;align-items:center}
+  .readout .seg{display:flex;align-items:center;gap:8px}
+  .readout .seg b{color:var(--lime);font-weight:600}
+  .readout .dot{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime)}
+  .readout .seg.cy b{color:var(--cyan)} .readout .seg.cy .dot{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+  h1{font-weight:800;font-size:clamp(2.5rem,7.2vw,6rem);line-height:.98;letter-spacing:-.035em;margin:0 0 30px;max-width:16ch}
+  h1 .g{color:var(--lime);text-shadow:0 0 40px rgba(198,242,78,.35)}
+  .lede{font-size:clamp(1.05rem,2.1vw,1.35rem);line-height:1.55;max-width:56ch;color:var(--txt-2);font-weight:400}
+  .lede b{color:var(--txt);font-weight:600}
+  .hero-cta{margin-top:42px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:11px;font-family:"JetBrains Mono",monospace;font-size:14px;font-weight:600;letter-spacing:.02em;text-decoration:none;padding:15px 24px;border-radius:3px;transition:.18s;border:1px solid transparent}
+  .btn-primary{background:var(--lime);color:var(--bg)}
+  .btn-primary:hover{box-shadow:var(--glow-lime);transform:translateY(-2px)}
+  .btn-primary .arr{transition:transform .2s}.btn-primary:hover .arr{transform:translate(3px,-3px)}
+  .btn-ghost{color:var(--txt-2);border-color:var(--line-2)}
+  .btn-ghost:hover{color:var(--txt);border-color:var(--txt-3);background:var(--surface)}
+
+  /* ---- section frame ---- */
+  section{padding:clamp(54px,8vw,104px) 0;position:relative}
+  .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:48px;font-family:"JetBrains Mono",monospace}
+  .sec-head .num{font-size:12px;color:var(--lime);letter-spacing:.05em}
+  .sec-head .title{font-size:14px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--txt)}
+  .sec-head .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line-2),transparent)}
+  .sec-head .note{font-size:11.5px;color:var(--txt-3);max-width:30ch;text-align:right;letter-spacing:.02em;line-height:1.5;text-transform:none}
+
+  /* ---- shipped cards ---- */
+  .ship-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{border:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--bg-2));border-radius:5px;padding:28px;display:flex;flex-direction:column;position:relative;transition:.25s;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--lime),transparent);opacity:0;transition:.3s}
+  .card:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:0 18px 50px -20px rgba(0,0,0,.8)}
+  .card:hover::before{opacity:.6}
+  .card .status{display:flex;align-items:center;gap:9px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--lime);margin-bottom:22px}
+  .card .status .pulse{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime);position:relative}
+  .card .status .pulse::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--lime);opacity:.5;animation:ping 2.4s ease-out infinite}
+  @keyframes ping{0%{transform:scale(.5);opacity:.7}100%{transform:scale(2);opacity:0}}
+  .card .status.warm{color:var(--amber)}.card .status.warm .pulse{background:var(--amber);box-shadow:0 0 10px var(--amber)}.card .status.warm .pulse::after{border-color:var(--amber)}
+  .card h3{font-weight:800;font-size:1.85rem;letter-spacing:-.02em;margin:0 0 5px}
+  .card .role{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--txt-3);letter-spacing:.02em;margin-bottom:18px}
+  .card p{margin:0 0 16px;color:var(--txt-2);font-size:15px;line-height:1.58}
+  .card p .hl{color:var(--lime);font-weight:500}
+  .stack{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 22px}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.02em;color:var(--txt-2);background:var(--surface-2);border:1px solid var(--line);padding:4px 9px;border-radius:3px}
+  .card .foot{margin-top:auto;padding-top:18px;border-top:1px solid var(--line)}
+  .visit{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:12.5px;text-decoration:none;color:var(--txt);transition:.2s}
+  .visit:hover{color:var(--lime);gap:12px}
+  .visit .u{color:var(--txt-3)}
+  .visit:hover .u{color:var(--lime-dim)}
+
+  /* ---- bio intro ---- */
+  .bio-intro{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:start;margin-bottom:48px}
+  .bio-intro .sub{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
+  .bio-intro h3{font-weight:800;font-size:clamp(1.9rem,4vw,3rem);line-height:1.04;letter-spacing:-.025em;margin:0 0 22px}
+  .bio-intro p{color:var(--txt-2);font-size:15.5px;line-height:1.62;margin:0 0 16px}
+  .bio-intro p b{color:var(--txt);font-weight:600}
+  .thesis{border-left:2px solid var(--lime);padding:10px 0 10px 22px;font-size:1.12rem;line-height:1.5;color:var(--txt);font-weight:500}
+  .thesis em{color:var(--lime);font-style:normal}
+
+  /* ---- panels ---- */
+  .panel{background:linear-gradient(180deg,var(--surface),var(--bg-2));border:1px solid var(--line);border-radius:6px;padding:clamp(24px,3.5vw,40px);position:relative;overflow:hidden}
+  .panel::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.4}
+  .panel-tab{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:26px}
+  .panel-tab::before{content:"◆";font-size:9px}
+  .panel-h{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.05em;color:var(--txt-3);margin-bottom:30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .legend{display:flex;gap:18px}
+  .legend span{display:inline-flex;align-items:center;gap:7px;color:var(--txt-2)}
+  .swatch{width:10px;height:10px;border-radius:2px}
+  .sw-llm{background:var(--lime);box-shadow:0 0 8px rgba(198,242,78,.5)}
+  .sw-det{background:var(--cyan);box-shadow:0 0 8px rgba(79,216,210,.5)}
+
+  .pipe{display:grid;grid-template-columns:repeat(7,1fr);gap:0;position:relative}
+  .stage{padding:0 6px;text-align:center;position:relative}
+  .stage:not(:last-child)::after{content:"";position:absolute;right:-2px;top:18px;width:14px;height:1px;background:var(--line-2);z-index:0}
+  .stage .node{width:38px;height:38px;border-radius:9px;margin:0 auto 13px;display:flex;align-items:center;justify-content:center;font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;border:1.5px solid;position:relative;z-index:1;background:var(--bg)}
+  .stage.llm .node{border-color:var(--lime);color:var(--lime);box-shadow:0 0 16px -4px rgba(198,242,78,.5)}
+  .stage.det .node{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 16px -4px rgba(79,216,210,.5)}
+  .stage .nm{font-family:"JetBrains Mono",monospace;font-size:11px;line-height:1.3;color:var(--txt);font-weight:500}
+  .stage .tag{font-size:9.5px;color:var(--txt-3);font-family:"JetBrains Mono",monospace;margin-top:5px}
+  .pipe-note{margin-top:30px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;line-height:1.62;color:var(--txt-2)}
+  .pipe-note b{color:var(--lime);font-weight:600}
+
+  /* ---- run ---- */
+  .run{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+  .verdict-card,.stats-card{background:linear-gradient(180deg,var(--surface),var(--bg-2));border:1px solid var(--line);border-radius:6px;padding:26px}
+  .verdict-card{border-color:rgba(255,180,84,.25)}
+  .vc-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px}
+  .vc-top .label,.stats-card .label{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-3)}
+  .vc-verdict{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;letter-spacing:.04em;color:var(--amber);text-shadow:0 0 16px rgba(255,180,84,.4);padding:5px 11px;border:1px solid rgba(255,180,84,.35);border-radius:3px}
+  .vc-summary{font-size:13.5px;line-height:1.6;color:var(--txt-2);margin-bottom:24px}
+  .scores{display:flex;flex-direction:column;gap:13px}
+  .score{display:grid;grid-template-columns:1fr auto;gap:8px 10px;align-items:center}
+  .score .nm{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--txt-2)}
+  .score .val{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--txt);font-weight:600}
+  .score .bar{grid-column:1/-1;height:4px;background:var(--surface-2);border-radius:3px;overflow:hidden;border:1px solid var(--line)}
+  .score .bar i{display:block;height:100%;border-radius:3px;width:0;transition:width 1.1s cubic-bezier(.4,0,.2,1)}
+  .vc-foot,.stats-card .label.bottom{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--txt-3);letter-spacing:.04em}
+
+  .twoset{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 18px}
+  .setbox{border:1px solid var(--line);border-radius:4px;padding:14px;background:var(--bg-2)}
+  .setbox .t{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--txt-3);margin-bottom:8px}
+  .setbox .dnds{font-family:"JetBrains Mono",monospace;font-size:1.9rem;font-weight:700;line-height:1;color:var(--txt)}
+  .setbox.b .dnds{color:var(--amber)}
+  .setbox .genes{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--txt-3);margin-top:8px}
+  .row{display:grid;grid-template-columns:1.5fr 1fr;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-family:"JetBrains Mono",monospace;font-size:12px}
+  .row:last-of-type{border-bottom:none}
+  .row .k{color:var(--txt-2)}.row .v{text-align:right;color:var(--txt)}
+  .row .v .ns{color:var(--red);font-size:10px;letter-spacing:.04em}
+
+  /* ---- VR ---- */
+  .vr{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;border:1px dashed var(--line-2);border-radius:5px;padding:32px;background:var(--bg-2);margin-top:30px}
+  .vr .lhs{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);line-height:1.5}
+  .vr h3{font-weight:800;font-size:1.6rem;margin:0 0 12px;letter-spacing:-.02em}
+  .vr p{margin:0 0 16px;color:var(--txt-2);font-size:15px;line-height:1.6;max-width:62ch}
+  .vr p b{color:var(--txt)}
+  .vr .stack{margin-bottom:0}
+
+  /* ---- how I work ---- */
+  .colophon{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .note-block{border:1px solid var(--line);border-radius:5px;padding:26px;background:linear-gradient(180deg,var(--surface),var(--bg-2))}
+  .note-block .t{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+  .note-block p{margin:0;font-size:14.5px;line-height:1.62;color:var(--txt-2)}
+  .note-block p b{color:var(--txt);font-weight:600}
+  .note-block .mono{font-size:13px;color:var(--lime)}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line);margin-top:70px;padding:clamp(64px,9vw,110px) 0 70px;position:relative}
+  .foot-cta{text-align:center}
+  .foot-cta .big{font-weight:800;font-size:clamp(2rem,5.5vw,4rem);letter-spacing:-.03em;margin:0 0 32px;line-height:1.02}
+  .foot-cta .big em{font-style:normal;color:var(--lime);text-shadow:0 0 40px rgba(198,242,78,.3)}
+  .foot-cta .btn-primary{margin:0 auto}
+  .foot-meta{margin-top:54px;display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--txt-3);letter-spacing:.04em;flex-wrap:wrap;gap:12px;border-top:1px solid var(--line);padding-top:24px}
+
+  .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+
+  @media(max-width:880px){
+    .ship-grid,.bio-intro,.run,.colophon{grid-template-columns:1fr}
+    .vr{grid-template-columns:1fr;gap:16px}
+    .pipe{grid-template-columns:repeat(2,1fr);gap:24px 12px}
+    .stage:not(:last-child)::after{display:none}
+    .sec-head .note{display:none}
+    body{background-size:40px 40px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="id"><span class="live"></span><b>MARCOS</b> / SOLO DEV / BUENOS AIRES</div>
+    <nav>
+      <a href="#shipped">Shipped</a>
+      <a href="#frontier">Frontier</a>
+      <a href="#contact" class="cta">Book a call ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="readout rv">
+      <span class="seg"><span class="dot"></span>STATUS: <b>2 LIVE</b></span>
+      <span class="seg cy"><span class="dot"></span><b>2 IN R&amp;D</b></span>
+      <span class="seg">LOC: BUENOS AIRES · EN/ES</span>
+    </div>
+    <h1 class="rv">Vague idea <span class="g">in</span>.<br>Shipped product <span class="g">out</span>.</h1>
+    <p class="lede rv"><b>AI runs through both how I build and what I build</b> - from production apps with real users to multi-agent systems that reason about evidence. Below: what's live, and how far I push when I'm exploring.</p>
+    <div class="hero-cta rv">
+      <a class="btn btn-primary" href="#contact">Book a 20-min call <span class="arr">↗</span></a>
+      <a class="btn btn-ghost" href="#shipped">See what's live</a>
+    </div>
+  </section>
+
+  <section id="shipped">
+    <div class="sec-head rv">
+      <span class="num">[01]</span><span class="title">Shipped &amp; Live</span>
+      <span class="rule"></span>
+      <span class="note">Deployed, running, reachable now. Proof the work gets finished.</span>
+    </div>
+    <div class="ship-grid">
+
+      <article class="card rv">
+        <div class="status"><span class="pulse"></span>Live · production</div>
+        <h3>HospitalTriaje</h3>
+        <div class="role">healthcare triage &amp; routing · argentina</div>
+        <p>A patient-facing triage and routing platform. The core design choice: an <span class="hl">auditable speech-transformation pipeline</span> - every spoken input maps to a traceable path through to a routing decision, so the chain from voice to outcome can be inspected, not trusted blindly.</p>
+        <div class="stack"><span class="chip">Flutter</span><span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span><span class="chip">Railway</span></div>
+        <div class="foot"><a class="visit" href="https://tutriage.up.railway.app/#/triage" target="_blank" rel="noopener">open live app <span class="u">tutriage.up.railway.app ↗</span></a></div>
+      </article>
+
+      <article class="card rv">
+        <div class="status warm"><span class="pulse"></span>Live · onboarding first clients</div>
+        <h3>finanzas-flow</h3>
+        <div class="role">financial dashboard &amp; automation · react</div>
+        <p>A financial management dashboard with a built-in <span class="hl">AI assistant</span> layered over the user's data. Deployed and running; currently onboarding its first clients.</p>
+        <div class="stack"><span class="chip">React</span><span class="chip">AI assistant</span><span class="chip">Netlify</span><span class="chip">CI/CD</span></div>
+        <div class="foot"><a class="visit" href="https://finanzasdashboard.netlify.app/dashboard" target="_blank" rel="noopener">open live app <span class="u">finanzasdashboard.netlify.app ↗</span></a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="frontier">
+    <div class="sec-head rv">
+      <span class="num">[02]</span><span class="title">Frontier · R&amp;D</span>
+      <span class="rule"></span>
+      <span class="note">In development. Shown for ceiling, not completion.</span>
+    </div>
+
+    <div class="bio-intro">
+      <div class="rv">
+        <div class="sub">BioAnalyst - multi-agent hypothesis stress-tester</div>
+        <h3>It tells you when your science doesn't hold.</h3>
+        <p>You hand it a research proposal. It extracts the falsifiable claims, retrieves evidence across four federated literature databases, runs <b>deterministic statistical tests</b> on real gene-set data, and issues a structured verdict - with a skeptic agent whose only job is to try to break the result.</p>
+        <p>The architectural opinion is the point: <b>the LLM formalizes, plans, and critiques; it computes nothing.</b> Every statistic runs in scipy/statsmodels, then a leave-one-out pass checks whether significance survives dropping each gene.</p>
+      </div>
+      <div class="thesis rv">The skill isn't "use AI." It's knowing where AI must <em>not</em> be trusted - and building the seam so the result stays auditable.</div>
+    </div>
+
+    <div class="panel rv">
+      <div class="panel-tab">Agent pipeline</div>
+      <div class="panel-h">
+        <span>7-stage reasoning graph · reasoning ⟂ execution</span>
+        <span class="legend"><span><i class="swatch sw-llm"></i>LLM reasons</span><span><i class="swatch sw-det"></i>deterministic</span></span>
+      </div>
+      <div class="pipe">
+        <div class="stage llm"><div class="node">1</div><div class="nm">Formalizer</div><div class="tag">claims + H₀</div></div>
+        <div class="stage llm"><div class="node">2</div><div class="nm">Librarian</div><div class="tag">4 sources</div></div>
+        <div class="stage det"><div class="node">3</div><div class="nm">Gene-set</div><div class="tag">+ controls</div></div>
+        <div class="stage det"><div class="node">4</div><div class="nm">Ensembl</div><div class="tag">dN/dS fetch</div></div>
+        <div class="stage llm"><div class="node">5</div><div class="nm">Methodologist</div><div class="tag">test plan</div></div>
+        <div class="stage det"><div class="node">6</div><div class="nm">Compute</div><div class="tag">scipy + LOO</div></div>
+        <div class="stage llm"><div class="node">7</div><div class="nm">Skeptic</div><div class="tag">verdict</div></div>
+      </div>
+      <div class="pipe-note">Stages <b>1, 2, 5, 7</b> are language reasoning - formalize claims, retrieve &amp; classify evidence, choose tests, critique. Stage <b>6</b> is pure deterministic compute: the model picks <i>which</i> tests, scipy decides <i>what the numbers say</i>. That separation is what keeps the verdict trustworthy.</div>
+    </div>
+
+    <div class="run">
+      <div class="verdict-card rv">
+        <div class="vc-top"><span class="label">Verdict · real run</span><span class="vc-verdict">⚠ RESULTS-PROBLEMATIC</span></div>
+        <div class="vc-summary">Saturated dN/dS values limit evolutionary-rate detection; correlation non-significant (p=0.263); no literature support for any claim despite an exhaustive search. The hypothesis is plausible - the evidence does not hold.</div>
+        <div class="scores">
+          <div class="score"><span class="nm">Overall falsifiability</span><span class="val">7.0</span><div class="bar"><i data-w="70" style="background:var(--green)"></i></div></div>
+          <div class="score"><span class="nm">Statistical robustness</span><span class="val">2.0</span><div class="bar"><i data-w="20" style="background:var(--red)"></i></div></div>
+          <div class="score"><span class="nm">Literature consensus</span><span class="val">1.0</span><div class="bar"><i data-w="10" style="background:var(--red)"></i></div></div>
+          <div class="score"><span class="nm">Mechanistic plausibility</span><span class="val">6.0</span><div class="bar"><i data-w="60" style="background:var(--amber)"></i></div></div>
+          <div class="score"><span class="nm">Survives alternatives</span><span class="val">8.0</span><div class="bar"><i data-w="80" style="background:var(--green)"></i></div></div>
+          <div class="score"><span class="nm">Genomic alignment</span><span class="val">2.0</span><div class="bar"><i data-w="20" style="background:var(--red)"></i></div></div>
+        </div>
+        <div class="vc-foot">heuristic score · not a calibrated probability</div>
+      </div>
+
+      <div class="stats-card rv">
+        <div class="label">Genomic assessment · what the numbers said</div>
+        <div class="twoset">
+          <div class="setbox"><div class="t">Set A - synaptic</div><div class="dnds">0.042</div><div class="genes">dN/dS · SYP, DLG4, CAMK2A…</div></div>
+          <div class="setbox b"><div class="t">Set B - BBB</div><div class="dnds">0.692</div><div class="genes">dN/dS · MFSD2A, SLC2A1…</div></div>
+        </div>
+        <div class="row"><span class="k">Kruskal–Wallis (4 groups)</span><span class="v">p=0.064 <span class="ns">ns</span></span></div>
+        <div class="row"><span class="k">Spearman ρ (n=492)</span><span class="v">−0.051 <span class="ns">ns</span></span></div>
+        <div class="row"><span class="k">Effect size (ε²)</span><span class="v">0.009</span></div>
+        <div class="row"><span class="k">Literature classified</span><span class="v">0 / 12 papers</span></div>
+        <div class="row"><span class="k">Verdict robustness</span><span class="v">n/a - no primary tests</span></div>
+      </div>
+    </div>
+
+    <div class="vr rv">
+      <div class="lhs">RANGE<br>CARD<br>[shelved]</div>
+      <div>
+        <h3>VR Dialogue Engine</h3>
+        <p>Training and deploying a <b>lightweight domain-specific model for real-time VR dialogue</b> - built on synthetic data, optimized for edge inference on standalone headsets. Currently shelved; included to show the range: healthcare apps → bioinformatics → on-device ML.</p>
+        <div class="stack"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Claude API</span><span class="chip">Unity</span><span class="chip">Meta Quest 3</span><span class="chip">edge inference</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <span class="num">[03]</span><span class="title">How I work</span>
+      <span class="rule"></span>
+      <span class="note">The habits behind the output.</span>
+    </div>
+    <div class="colophon">
+      <div class="note-block rv">
+        <div class="t">Tooling I built for myself</div>
+        <p><b>BurnLog</b> - a single-file, fully-local analyzer for Claude Code session logs: cost, latency, token usage and cache efficiency from a dropped <span class="mono">.jsonl</span>, no backend, no uploads. Built to cut my own spend before it was anything else.</p>
+      </div>
+      <div class="note-block rv">
+        <div class="t">How I think about systems</div>
+        <p>I work from an explicit <b>semantic architecture</b> method - separating reasoning, orchestration, semantics and execution into distinct layers. It's why BioAnalyst keeps the model out of the math. I build systems, not scripts.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-cta">
+      <p class="big rv">Got a vague idea that needs to <em>become real?</em></p>
+      <a class="btn btn-primary rv" href="https://cal.com/your-handle" target="_blank" rel="noopener">Book a 20-min call <span class="arr">↗</span></a>
+    </div>
+    <div class="foot-meta">
+      <span>MARCOS · SOLO DEVELOPER · BUENOS AIRES, AR</span>
+      <span>EN / ES · AVAILABLE FOR CONTRACT &amp; FREELANCE</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach((e)=>{if(e.isIntersecting){
+    const sibs=[...e.target.parentElement.querySelectorAll('.rv')];
+    e.target.style.transitionDelay=(Math.min(sibs.indexOf(e.target),4)*70)+'ms';
+    e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  const bio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+    e.target.querySelectorAll('.bar i').forEach((b,i)=>{setTimeout(()=>b.style.width=b.dataset.w+'%',180+i*90);});
+    bio.unobserve(e.target);}});},{threshold:.3});
+  const vc=document.querySelector('.verdict-card');if(vc)bio.observe(vc);
+</script>
+</body>
+</html>
