@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Marcos - solo developer · shipped products & AI systems</title>
+<title id="page-title">Marcos - solo developer · shipped products & AI systems</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -56,7 +56,8 @@
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   .bar nav{display:flex;gap:6px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
   .bar nav a{text-decoration:none;color:var(--txt-3);padding:6px 12px;border:1px solid transparent;border-radius:3px;transition:.18s}
-  .bar nav a:hover{color:var(--txt);border-color:var(--line-2)}
+    .bar nav button{font-family:inherit;font-size:12px;text-transform:uppercase;color:var(--txt-3);background:transparent;border:1px solid transparent;border-radius:3px;padding:6px 12px;cursor:pointer;transition:.18s}
+    .bar nav a:hover,.bar nav button:hover{color:var(--txt);border-color:var(--line-2)}
   .bar nav a.cta{color:var(--bg);background:var(--lime);font-weight:600}
   .bar nav a.cta:hover{box-shadow:var(--glow-lime);border-color:transparent}
 
@@ -212,9 +213,10 @@
   <div class="wrap bar">
     <div class="id"><span class="live"></span><b>MARCOS</b> / SOLO DEV / BUENOS AIRES</div>
     <nav>
-      <a href="#shipped">Shipped</a>
-      <a href="#frontier">Frontier</a>
-      <a href="#contact" class="cta">Book a call ↗</a>
+      <button id="translate-toggle" class="btn btn-ghost" type="button" aria-label="Translate page to Spanish">ES</button>
+      <a href="#shipped" data-i18n-key="nav-shipped">Shipped</a>
+      <a href="#frontier" data-i18n-key="nav-frontier">Frontier</a>
+      <a href="#contact" class="cta" data-i18n-key="nav-book">Book a call ↗</a>
     </nav>
   </div>
 </header>
@@ -223,42 +225,42 @@
 
   <section class="hero">
     <div class="readout rv">
-      <span class="seg"><span class="dot"></span>STATUS: <b>2 LIVE</b></span>
-      <span class="seg cy"><span class="dot"></span><b>2 IN R&amp;D</b></span>
-      <span class="seg">LOC: BUENOS AIRES · EN/ES</span>
+      <span class="seg" id="status-live"><span class="dot"></span>STATUS: <b>2 LIVE</b></span>
+      <span class="seg cy" id="status-rnd"><span class="dot"></span><b>2 IN R&amp;D</b></span>
+      <span class="seg" id="status-loc"><span class="dot"></span>LOC: BUENOS AIRES · EN/ES</span>
     </div>
-    <h1 class="rv">Vague idea <span class="g">in</span>.<br>Shipped product <span class="g">out</span>.</h1>
-    <p class="lede rv"><b>AI runs through both how I build and what I build</b> - from production apps with real users to multi-agent systems that reason about evidence. Below: what's live, and how far I push when I'm exploring.</p>
+    <h1 class="rv" id="hero-head">Vague idea <span class="g">in</span>.<br>Shipped product <span class="g">out</span>.</h1>
+    <p class="lede rv" id="hero-lede">I team up with founders and teams to turn ideas into products people actually use: from production apps with real users to AI-powered systems built to solve real business problems.</p>
     <div class="hero-cta rv">
-      <a class="btn btn-primary" href="#contact">Book a 20-min call <span class="arr">↗</span></a>
-      <a class="btn btn-ghost" href="#shipped">See what's live</a>
+      <a class="btn btn-primary" id="hero-cta" href="#contact">Book a 20-min call <span class="arr">↗</span></a>
+      <a class="btn btn-ghost" id="hero-see" href="#shipped">See what's live</a>
     </div>
   </section>
 
   <section id="shipped">
     <div class="sec-head rv">
-      <span class="num">[01]</span><span class="title">Shipped &amp; Live</span>
+      <span class="num">[01]</span><span class="title" data-i18n-key="section-shipped">Shipped &amp; Live</span>
       <span class="rule"></span>
-      <span class="note">Deployed, running, reachable now. Proof the work gets finished.</span>
+      <span class="note" id="shipped-note">Deployed, running, reachable now. Proof the work gets finished.</span>
     </div>
     <div class="ship-grid">
 
       <article class="card rv">
-        <div class="status"><span class="pulse"></span>Live · production</div>
-        <h3>HospitalTriaje</h3>
-        <div class="role">healthcare triage &amp; routing · argentina</div>
-        <p>A patient-facing triage and routing platform. The core design choice: an <span class="hl">auditable speech-transformation pipeline</span> - every spoken input maps to a traceable path through to a routing decision, so the chain from voice to outcome can be inspected, not trusted blindly.</p>
+        <div class="status"><span class="pulse"></span><span id="card1-status">Live · production</span></div>
+        <h3 id="card1-title">HospitalTriaje</h3>
+        <div class="role" id="card1-role">healthcare triage &amp; routing · argentina</div>
+        <p id="card1-desc">A patient-facing triage and routing platform. The core design choice: an <span class="hl">auditable speech-transformation pipeline</span> - every spoken input maps to a traceable path through to a routing decision, so the chain from voice to outcome can be inspected, not trusted blindly.</p>
         <div class="stack"><span class="chip">Flutter</span><span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span><span class="chip">Railway</span></div>
-        <div class="foot"><a class="visit" href="https://tutriage.up.railway.app/#/triage" target="_blank" rel="noopener">open live app <span class="u">tutriage.up.railway.app ↗</span></a></div>
+        <div class="foot"><a class="visit" href="https://tutriage.up.railway.app/#/triage" target="_blank" rel="noopener" id="card1-link">open live app <span class="u">tutriage.up.railway.app ↗</span></a></div>
       </article>
 
       <article class="card rv">
-        <div class="status warm"><span class="pulse"></span>Live · onboarding first clients</div>
-        <h3>finanzas-flow</h3>
-        <div class="role">financial dashboard &amp; automation · react</div>
-        <p>A financial management dashboard with a built-in <span class="hl">AI assistant</span> layered over the user's data. Deployed and running; currently onboarding its first clients.</p>
+        <div class="status warm"><span class="pulse"></span><span id="card2-status">Live · onboarding first clients</span></div>
+        <h3 id="card2-title">finanzas-flow</h3>
+        <div class="role" id="card2-role">financial dashboard &amp; automation · react</div>
+        <p id="card2-desc">A financial management dashboard with a built-in <span class="hl">AI assistant</span> layered over the user's data. Deployed and running; currently onboarding its first clients.</p>
         <div class="stack"><span class="chip">React</span><span class="chip">AI assistant</span><span class="chip">Netlify</span><span class="chip">CI/CD</span></div>
-        <div class="foot"><a class="visit" href="https://finanzasdashboard.netlify.app/dashboard" target="_blank" rel="noopener">open live app <span class="u">finanzasdashboard.netlify.app ↗</span></a></div>
+        <div class="foot"><a class="visit" href="https://finanzasdashboard.netlify.app/dashboard" target="_blank" rel="noopener" id="card2-link">open live app <span class="u">finanzasdashboard.netlify.app ↗</span></a></div>
       </article>
 
     </div>
@@ -266,26 +268,26 @@
 
   <section id="frontier">
     <div class="sec-head rv">
-      <span class="num">[02]</span><span class="title">Frontier · R&amp;D</span>
+      <span class="num">[02]</span><span class="title" data-i18n-key="section-frontier">Frontier · R&amp;D</span>
       <span class="rule"></span>
-      <span class="note">In development. Shown for ceiling, not completion.</span>
+      <span class="note" id="frontier-note">In development.</span>
     </div>
 
     <div class="bio-intro">
       <div class="rv">
-        <div class="sub">BioAnalyst - multi-agent hypothesis stress-tester</div>
-        <h3>It tells you when your science doesn't hold.</h3>
-        <p>You hand it a research proposal. It extracts the falsifiable claims, retrieves evidence across four federated literature databases, runs <b>deterministic statistical tests</b> on real gene-set data, and issues a structured verdict - with a skeptic agent whose only job is to try to break the result.</p>
-        <p>The architectural opinion is the point: <b>the LLM formalizes, plans, and critiques; it computes nothing.</b> Every statistic runs in scipy/statsmodels, then a leave-one-out pass checks whether significance survives dropping each gene.</p>
+        <div class="sub" id="frontier-sub">BioAnalyst - multi-agent hypothesis stress-tester</div>
+        <h3 id="frontier-title">It tells you when your science doesn't hold.</h3>
+        <p id="frontier-desc-1">You hand it a research proposal. It extracts the falsifiable claims, retrieves evidence across four federated literature databases, runs <b>deterministic statistical tests</b> on real gene-set data, and issues a structured verdict - with a skeptic agent whose only job is to try to break the result.</p>
+        <p id="frontier-desc-2">The architectural opinion is the point: <b>the LLM formalizes, plans, and critiques; it computes nothing.</b> Every statistic runs in scipy/statsmodels, then a leave-one-out pass checks whether significance survives dropping each gene.</p>
       </div>
-      <div class="thesis rv">The skill isn't "use AI." It's knowing where AI must <em>not</em> be trusted - and building the seam so the result stays auditable.</div>
+      <div class="thesis rv" id="frontier-thesis">The skill isn't "use AI." It's knowing where AI must <em>not</em> be trusted - and building the seam so the result stays auditable.</div>
     </div>
 
     <div class="panel rv">
-      <div class="panel-tab">Agent pipeline</div>
+      <div class="panel-tab" id="panel-tab">Agent pipeline</div>
       <div class="panel-h">
-        <span>7-stage reasoning graph · reasoning ⟂ execution</span>
-        <span class="legend"><span><i class="swatch sw-llm"></i>LLM reasons</span><span><i class="swatch sw-det"></i>deterministic</span></span>
+        <span id="panel-summary">7-stage reasoning graph · reasoning ⟂ execution</span>
+        <span class="legend"><span id="panel-legend-llm"><i class="swatch sw-llm"></i>LLM reasons</span><span id="panel-legend-det"><i class="swatch sw-det"></i>deterministic</span></span>
       </div>
       <div class="pipe">
         <div class="stage llm"><div class="node">1</div><div class="nm">Formalizer</div><div class="tag">claims + H₀</div></div>
@@ -296,43 +298,43 @@
         <div class="stage det"><div class="node">6</div><div class="nm">Compute</div><div class="tag">scipy + LOO</div></div>
         <div class="stage llm"><div class="node">7</div><div class="nm">Skeptic</div><div class="tag">verdict</div></div>
       </div>
-      <div class="pipe-note">Stages <b>1, 2, 5, 7</b> are language reasoning - formalize claims, retrieve &amp; classify evidence, choose tests, critique. Stage <b>6</b> is pure deterministic compute: the model picks <i>which</i> tests, scipy decides <i>what the numbers say</i>. That separation is what keeps the verdict trustworthy.</div>
+      <div class="pipe-note" id="panel-note">Stages <b>1, 2, 5, 7</b> are language reasoning - formalize claims, retrieve &amp; classify evidence, choose tests, critique. Stage <b>6</b> is pure deterministic compute: the model picks <i>which</i> tests, scipy decides <i>what the numbers say</i>. That separation is what keeps the verdict trustworthy.</div>
     </div>
 
     <div class="run">
       <div class="verdict-card rv">
-        <div class="vc-top"><span class="label">Verdict · real run</span><span class="vc-verdict">⚠ RESULTS-PROBLEMATIC</span></div>
-        <div class="vc-summary">Saturated dN/dS values limit evolutionary-rate detection; correlation non-significant (p=0.263); no literature support for any claim despite an exhaustive search. The hypothesis is plausible - the evidence does not hold.</div>
+<div class="vc-top"><span class="label" id="verdict-label">Verdict · real run</span><span class="vc-verdict" id="verdict-status">⚠ RESULTS-PROBLEMATIC</span></div>
+        <div class="vc-summary" id="verdict-summary">Saturated dN/dS values limit evolutionary-rate detection; correlation non-significant (p=0.263); no literature support for any claim despite an exhaustive search. The hypothesis is plausible - the evidence does not hold.</div>
         <div class="scores">
-          <div class="score"><span class="nm">Overall falsifiability</span><span class="val">7.0</span><div class="bar"><i data-w="70" style="background:var(--green)"></i></div></div>
-          <div class="score"><span class="nm">Statistical robustness</span><span class="val">2.0</span><div class="bar"><i data-w="20" style="background:var(--red)"></i></div></div>
-          <div class="score"><span class="nm">Literature consensus</span><span class="val">1.0</span><div class="bar"><i data-w="10" style="background:var(--red)"></i></div></div>
-          <div class="score"><span class="nm">Mechanistic plausibility</span><span class="val">6.0</span><div class="bar"><i data-w="60" style="background:var(--amber)"></i></div></div>
-          <div class="score"><span class="nm">Survives alternatives</span><span class="val">8.0</span><div class="bar"><i data-w="80" style="background:var(--green)"></i></div></div>
-          <div class="score"><span class="nm">Genomic alignment</span><span class="val">2.0</span><div class="bar"><i data-w="20" style="background:var(--red)"></i></div></div>
+          <div class="score"><span class="nm" id="score-falsifiability">Overall falsifiability</span><span class="val">7.0</span><div class="bar"><i data-w="70" style="background:var(--green)"></i></div></div>
+          <div class="score"><span class="nm" id="score-robustness">Statistical robustness</span><span class="val">2.0</span><div class="bar"><i data-w="20" style="background:var(--red)"></i></div></div>
+          <div class="score"><span class="nm" id="score-consensus">Literature consensus</span><span class="val">1.0</span><div class="bar"><i data-w="10" style="background:var(--red)"></i></div></div>
+          <div class="score"><span class="nm" id="score-plausibility">Mechanistic plausibility</span><span class="val">6.0</span><div class="bar"><i data-w="60" style="background:var(--amber)"></i></div></div>
+          <div class="score"><span class="nm" id="score-alternatives">Survives alternatives</span><span class="val">8.0</span><div class="bar"><i data-w="80" style="background:var(--green)"></i></div></div>
+          <div class="score"><span class="nm" id="score-alignment">Genomic alignment</span><span class="val">2.0</span><div class="bar"><i data-w="20" style="background:var(--red)"></i></div></div>
         </div>
-        <div class="vc-foot">heuristic score · not a calibrated probability</div>
+        <div class="vc-foot" id="verdict-foot">heuristic score · not a calibrated probability</div>
       </div>
 
       <div class="stats-card rv">
-        <div class="label">Genomic assessment · what the numbers said</div>
+        <div class="label" id="stats-label">Genomic assessment · what the numbers said</div>
         <div class="twoset">
-          <div class="setbox"><div class="t">Set A - synaptic</div><div class="dnds">0.042</div><div class="genes">dN/dS · SYP, DLG4, CAMK2A…</div></div>
-          <div class="setbox b"><div class="t">Set B - BBB</div><div class="dnds">0.692</div><div class="genes">dN/dS · MFSD2A, SLC2A1…</div></div>
+          <div class="setbox"><div class="t" id="seta-title">Set A - synaptic</div><div class="dnds" id="seta-dnds">0.042</div><div class="genes" id="seta-genes">dN/dS · SYP, DLG4, CAMK2A…</div></div>
+          <div class="setbox b"><div class="t" id="setb-title">Set B - BBB</div><div class="dnds" id="setb-dnds">0.692</div><div class="genes" id="setb-genes">dN/dS · MFSD2A, SLC2A1…</div></div>
         </div>
-        <div class="row"><span class="k">Kruskal–Wallis (4 groups)</span><span class="v">p=0.064 <span class="ns">ns</span></span></div>
-        <div class="row"><span class="k">Spearman ρ (n=492)</span><span class="v">−0.051 <span class="ns">ns</span></span></div>
-        <div class="row"><span class="k">Effect size (ε²)</span><span class="v">0.009</span></div>
-        <div class="row"><span class="k">Literature classified</span><span class="v">0 / 12 papers</span></div>
-        <div class="row"><span class="k">Verdict robustness</span><span class="v">n/a - no primary tests</span></div>
+        <div class="row"><span class="k" id="row-kruskal">Kruskal–Wallis (4 groups)</span><span class="v" id="row-kruskal-val">p=0.064 <span class="ns">ns</span></span></div>
+        <div class="row"><span class="k" id="row-spearman">Spearman ρ (n=492)</span><span class="v" id="row-spearman-val">−0.051 <span class="ns">ns</span></span></div>
+        <div class="row"><span class="k" id="row-effect">Effect size (ε²)</span><span class="v" id="row-effect-val">0.009</span></div>
+        <div class="row"><span class="k" id="row-literature">Literature classified</span><span class="v" id="row-literature-val">0 / 12 papers</span></div>
+        <div class="row"><span class="k" id="row-robustness">Verdict robustness</span><span class="v" id="row-robustness-val">n/a - no primary tests</span></div>
       </div>
     </div>
-
+    
     <div class="vr rv">
-      <div class="lhs">RANGE<br>CARD<br>[shelved]</div>
+      <div class="lhs" id="vr-lhs">RANGE<br>CARD<br>[shelved]</div>
       <div>
-        <h3>VR Dialogue Engine</h3>
-        <p>Training and deploying a <b>lightweight domain-specific model for real-time VR dialogue</b> - built on synthetic data, optimized for edge inference on standalone headsets. Currently shelved; included to show the range: healthcare apps → bioinformatics → on-device ML.</p>
+        <h3 id="vr-title">VR Dialogue Engine</h3>
+        <p id="vr-desc">Training and deploying a <b>lightweight domain-specific model for real-time VR dialogue</b> - built on synthetic data, optimized for edge inference on standalone headsets. Currently on puase.</p>
         <div class="stack"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Claude API</span><span class="chip">Unity</span><span class="chip">Meta Quest 3</span><span class="chip">edge inference</span></div>
       </div>
     </div>
@@ -340,18 +342,18 @@
 
   <section>
     <div class="sec-head rv">
-      <span class="num">[03]</span><span class="title">How I work</span>
+      <span class="num">[03]</span><span class="title" id="section-how">How I work</span>
       <span class="rule"></span>
-      <span class="note">The habits behind the output.</span>
+      <span class="note" id="section-how-note">The habits behind the output.</span>
     </div>
     <div class="colophon">
       <div class="note-block rv">
-        <div class="t">Tooling I built for myself</div>
-        <p><b>BurnLog</b> - a single-file, fully-local analyzer for Claude Code session logs: cost, latency, token usage and cache efficiency from a dropped <span class="mono">.jsonl</span>, no backend, no uploads. Built to cut my own spend before it was anything else.</p>
+        <div class="t" id="note1-title">Tooling I built for myself</div>
+        <p id="note1-desc"><b>BurnLog</b> - a single-file, fully-local analyzer for Claude Code session logs: cost, latency, token usage and cache efficiency from a dropped <span class="mono">.jsonl</span>, no backend, no uploads. Built to cut my own spend before it was anything else.</p>
       </div>
       <div class="note-block rv">
-        <div class="t">How I think about systems</div>
-        <p>I work from an explicit <b>semantic architecture</b> method - separating reasoning, orchestration, semantics and execution into distinct layers. It's why BioAnalyst keeps the model out of the math. I build systems, not scripts.</p>
+        <div class="t" id="note2-title">How I think about systems</div>
+        <p id="note2-desc">I work from an explicit <b>semantic architecture</b> method - separating reasoning, orchestration, semantics and execution into distinct layers. It's why BioAnalyst keeps the model out of the math. I build systems, not scripts.</p>
       </div>
     </div>
   </section>
@@ -361,12 +363,12 @@
 <footer id="contact">
   <div class="wrap">
     <div class="foot-cta">
-      <p class="big rv">Got a vague idea that needs to <em>become real?</em></p>
-      <a class="btn btn-primary rv" href="https://cal.com/marcos-young-jqydml" target="_blank" rel="noopener">Book a 20-min call <span class="arr">↗</span></a>
+      <p class="big rv" id="footer-cta">Got a vague idea that needs to <em>become real?</em></p>
+      <a class="btn btn-primary rv" id="footer-book" href="https://cal.com/marcos-young-jqydml" target="_blank" rel="noopener">Book a 20-min call <span class="arr">↗</span></a>
     </div>
     <div class="foot-meta">
-      <span>MARCOS · SOLO DEVELOPER · BUENOS AIRES, AR</span>
-      <span>EN / ES · AVAILABLE FOR CONTRACT &amp; FREELANCE</span>
+      <span id="footer-meta-1">MARCOS · SOLO DEVELOPER · BUENOS AIRES, AR</span>
+      <span id="footer-meta-2">EN / ES · AVAILABLE FOR CONTRACT &amp; FREELANCE</span>
     </div>
   </div>
 </footer>
@@ -381,6 +383,185 @@
     e.target.querySelectorAll('.bar i').forEach((b,i)=>{setTimeout(()=>b.style.width=b.dataset.w+'%',180+i*90);});
     bio.unobserve(e.target);}});},{threshold:.3});
   const vc=document.querySelector('.verdict-card');if(vc)bio.observe(vc);
+
+  const translations = {
+    en: {
+      'page-title': 'Marcos - solo developer · shipped products & AI systems',
+      'nav-shipped': 'Shipped',
+      'nav-frontier': 'Frontier',
+      'nav-book': 'Book a call ↗',
+      'status-live': 'STATUS: <b>2 LIVE</b>',
+      'status-rnd': '<span class="dot"></span><b>2 IN R&amp;D</b>',
+      'status-loc': 'LOC: BUENOS AIRES · EN/ES',
+      'hero-head': 'Vague idea <span class="g">in</span>.<br>Shipped product <span class="g">out</span>.',
+      'hero-lede': '<b>AI runs through both how I build and what I build</b> - from production apps with real users to multi-agent systems that reason about evidence. Below: what&apos;s live, and how far I push when I&apos;m exploring.',
+      'hero-cta': 'Book a 20-min call <span class="arr">↗</span>',
+      'hero-see': 'See what&apos;s live',
+      'section-shipped': 'Shipped &amp; Live',
+      'shipped-note': 'Deployed, running, reachable now. Proof the work gets finished.',
+      'card1-status': 'Live · production',
+      'card1-title': 'HospitalTriaje',
+      'card1-role': 'healthcare triage &amp; routing · argentina',
+      'card1-desc': 'A patient-facing triage and routing platform. The core design choice: an <span class="hl">auditable speech-transformation pipeline</span> - every spoken input maps to a traceable path through to a routing decision, so the chain from voice to outcome can be inspected, not trusted blindly.',
+      'card1-link': 'open live app <span class="u">tutriage.up.railway.app ↗</span>',
+      'card2-status': 'Live · onboarding first clients',
+      'card2-title': 'finanzas-flow',
+      'card2-role': 'financial dashboard &amp; automation · react',
+      'card2-desc': 'A financial management dashboard with a built-in <span class="hl">AI assistant</span> layered over the user&apos;s data. Deployed and running; currently onboarding its first clients.',
+      'card2-link': 'open live app <span class="u">finanzasdashboard.netlify.app ↗</span>',
+      'section-frontier': 'Frontier · R&amp;D',
+      'frontier-note': 'In development. Shown for ceiling, not completion.',
+      'frontier-sub': 'BioAnalyst - multi-agent hypothesis stress-tester',
+      'frontier-title': 'It tells you when your science doesn&apos;t hold.',
+      'frontier-desc-1': 'You hand it a research proposal. It extracts the falsifiable claims, retrieves evidence across four federated literature databases, runs <b>deterministic statistical tests</b> on real gene-set data, and issues a structured verdict - with a skeptic agent whose only job is to try to break the result.',
+      'frontier-desc-2': 'The architectural opinion is the point: <b>the LLM formalizes, plans, and critiques; it computes nothing.</b> Every statistic runs in scipy/statsmodels, then a leave-one-out pass checks whether significance survives dropping each gene.',
+      'frontier-thesis': 'The skill isn&apos;t "use AI." It&apos;s knowing where AI must <em>not</em> be trusted - and building the seam so the result stays auditable.',
+      'panel-tab': 'Agent pipeline',
+      'panel-summary': '7-stage reasoning graph · reasoning ⟂ execution',
+      'panel-legend-llm': '<i class="swatch sw-llm"></i>LLM reasons',
+      'panel-legend-det': '<i class="swatch sw-det"></i>deterministic',
+      'panel-note': 'Stages <b>1, 2, 5, 7</b> are language reasoning - formalize claims, retrieve &amp; classify evidence, choose tests, critique. Stage <b>6</b> is pure deterministic compute: the model picks <i>which</i> tests, scipy decides <i>what the numbers say</i>. That separation is what keeps the verdict trustworthy.',
+      'verdict-label': 'Verdict · real run',
+      'verdict-status': '⚠ RESULTS-PROBLEMATIC',
+      'verdict-summary': 'Saturated dN/dS values limit evolutionary-rate detection; correlation non-significant (p=0.263); no literature support for any claim despite an exhaustive search. The hypothesis is plausible - the evidence does not hold.',
+      'score-falsifiability': 'Overall falsifiability',
+      'score-robustness': 'Statistical robustness',
+      'score-consensus': 'Literature consensus',
+      'score-plausibility': 'Mechanistic plausibility',
+      'score-alternatives': 'Survives alternatives',
+      'score-alignment': 'Genomic alignment',
+      'verdict-foot': 'heuristic score · not a calibrated probability',
+      'stats-label': 'Genomic assessment · what the numbers said',
+      'seta-title': 'Set A - synaptic',
+      'seta-dnds': '0.042',
+      'seta-genes': 'dN/dS · SYP, DLG4, CAMK2A…',
+      'setb-title': 'Set B - BBB',
+      'setb-dnds': '0.692',
+      'setb-genes': 'dN/dS · MFSD2A, SLC2A1…',
+      'row-kruskal': 'Kruskal–Wallis (4 groups)',
+      'row-kruskal-val': 'p=0.064 <span class="ns">ns</span>',
+      'row-spearman': 'Spearman ρ (n=492)',
+      'row-spearman-val': '−0.051 <span class="ns">ns</span>',
+      'row-effect': 'Effect size (ε²)',
+      'row-effect-val': '0.009',
+      'row-literature': 'Literature classified',
+      'row-literature-val': '0 / 12 papers',
+      'row-robustness': 'Verdict robustness',
+      'row-robustness-val': 'n/a - no primary tests',
+      'vr-lhs': 'RANGE<br>CARD<br>[shelved]',
+      'vr-title': 'VR Dialogue Engine',
+      'vr-desc': 'Training and deploying a <b>lightweight domain-specific model for real-time VR dialogue</b> - built on synthetic data, optimized for edge inference on standalone headsets. Currently shelved; included to show the range: healthcare apps → bioinformatics → on-device ML.',
+      'section-how': 'How I work',
+      'section-how-note': 'The habits behind the output.',
+      'note1-title': 'Tooling I built for myself',
+      'note1-desc': '<b>BurnLog</b> - a single-file, fully-local analyzer for Claude Code session logs: cost, latency, token usage and cache efficiency from a dropped <span class="mono">.jsonl</span>, no backend, no uploads. Built to cut my own spend before it was anything else.',
+      'note2-title': 'How I think about systems',
+      'note2-desc': 'I work from an explicit <b>semantic architecture</b> method - separating reasoning, orchestration, semantics and execution into distinct layers. It&apos;s why BioAnalyst keeps the model out of the math. I build systems, not scripts.',
+      'footer-cta': 'Got a vague idea that needs to <em>become real?</em>',
+      'footer-book': 'Book a 20-min call <span class="arr">↗</span>',
+      'footer-meta-1': 'MARCOS · SOLO DEVELOPER · BUENOS AIRES, AR',
+      'footer-meta-2': 'EN / ES · AVAILABLE FOR CONTRACT &amp; FREELANCE'
+    },
+    es: {
+      'page-title': 'Marcos - desarrollador individual · productos enviados & sistemas AI',
+      'nav-shipped': 'Deployado',
+      'nav-frontier': 'Vanguardia',
+      'nav-book': 'Reserva llamada ↗',
+      'status-live': 'ESTADO: <b>2 EN VIVO</b>',
+      'status-rnd': '<span class="dot"></span><b>2 EN I+D</b>',
+      'status-loc': 'UBICACIÓN: BUENOS AIRES · EN/ES',
+      'hero-head': 'De <span class="g">idea</span> abstracta.<br>A <span class="g">producto</span> real.',
+      'hero-lede': 'Colaboro con fundadores y equipos para transformar ideas en productos que la gente realmente use: desde aplicaciones en producción con usuarios reales hasta sistemas impulsados por IA diseñados para resolver problemas de negocio reales.',
+      'hero-cta': 'Reserva una llamada de 20 min <span class="arr">↗</span>',
+      'hero-see': 'Ver lo que está en vivo',
+      'section-shipped': 'Deployado &amp; Vivo',
+      'shipped-note': 'Desplegado, en ejecución, accesible ahora. Prueba de que el trabajo se termina.',
+      'card1-status': 'En vivo · producción',
+      'card1-title': 'HospitalTriaje',
+      'card1-role': 'triaje y enrutamiento de salud · argentina',
+      'card1-desc': 'Una plataforma de triaje y enrutamiento orientada al paciente. La decisión de diseño central: una <span class="hl">canalización de transformación de voz auditable</span> - cada entrada hablada mapea a un camino trazable hasta una decisión de enrutamiento, de modo que la cadena de voz a resultado puede inspeccionarse, no confiarse ciegamente.',
+      'card1-link': 'abrir app en vivo <span class="u">tutriage.up.railway.app ↗</span>',
+      'card2-status': 'En vivo · incorporando primeros clientes',
+      'card2-title': 'finanzas-flow',
+      'card2-role': 'panel financiero y automatización · react',
+      'card2-desc': 'Un panel de gestión financiera con un <span class="hl">asistente de IA</span> integrado sobre los datos del usuario. Desplegado y en ejecución; actualmente incorporando a sus primeros clientes.',
+      'card2-link': 'abrir app en vivo <span class="u">finanzasdashboard.netlify.app ↗</span>',
+      'section-frontier': 'Vanguardia · I+D',
+      'frontier-note': 'En desarrollo.',
+      'frontier-sub': 'BioAnalyst - probador de hipótesis multi-agente',
+      'frontier-title': 'Te dice cuando tu ciencia no se sostiene.',
+      'frontier-desc-1': 'Le entregas una propuesta de investigación. Extrae las afirmaciones falsables, recupera evidencia de cuatro bases de datos literarias federadas, ejecuta <b>pruebas estadísticas deterministas</b> sobre datos reales de conjuntos de genes y emite un veredicto estructurado - con un agente escéptico cuya única tarea es intentar refutar el resultado.',
+      'frontier-desc-2': 'La opinión arquitectónica es el punto: <b>el LLM formaliza, planifica y critica; no calcula nada.</b> Cada estadística se ejecuta en scipy/statsmodels, luego una pasada leave-one-out verifica si la significación sobrevive al descartar cada gen.',
+      'frontier-thesis': 'La habilidad no es "usar IA." Es saber dónde la IA no debe <em>ser confiada</em> - y construir la costura para que el resultado siga siendo auditable.',
+      'panel-tab': 'Canalización de agentes',
+      'panel-summary': 'Gráfico de razonamiento en 7 etapas · razonamiento ⟂ ejecución',
+      'panel-legend-llm': '<i class="swatch sw-llm"></i>razona el LLM',
+      'panel-legend-det': '<i class="swatch sw-det"></i>determinista',
+      'panel-note': 'Las etapas <b>1, 2, 5, 7</b> son razonamiento de lenguaje - formalizar afirmaciones, recuperar y clasificar evidencia, elegir pruebas, criticar. La etapa <b>6</b> es cómputo determinista puro: el modelo elige <i>qué</i> pruebas, scipy decide <i>qué dicen los números</i>. Esa separación es lo que mantiene el veredicto confiable.',
+      'verdict-label': 'Veredicto · ejecución real',
+      'verdict-status': '⚠ RESULTADOS PROBLEMÁTICOS',
+      'verdict-summary': 'Los valores saturados de dN/dS limitan la detección de tasas evolutivas; correlación no significativa (p=0.263); sin apoyo bibliográfico para ninguna afirmación a pesar de una búsqueda exhaustiva. La hipótesis es plausible - la evidencia no se sostiene.',
+      'score-falsifiability': 'Falsabilidad general',
+      'score-robustness': 'Robustez estadística',
+      'score-consensus': 'Consenso bibliográfico',
+      'score-plausibility': 'Plausibilidad mecanicista',
+      'score-alternatives': 'Sobrevive alternativas',
+      'score-alignment': 'Alineación genómica',
+      'verdict-foot': 'puntuación heurística · no es una probabilidad calibrada',
+      'stats-label': 'Evaluación genómica · lo que dijeron los números',
+      'seta-title': 'Conjunto A - sináptico',
+      'seta-dnds': '0.042',
+      'seta-genes': 'dN/dS · SYP, DLG4, CAMK2A…',
+      'setb-title': 'Conjunto B - BBB',
+      'setb-dnds': '0.692',
+      'setb-genes': 'dN/dS · MFSD2A, SLC2A1…',
+      'row-kruskal': 'Kruskal–Wallis (4 grupos)',
+      'row-kruskal-val': 'p=0.064 <span class="ns">ns</span>',
+      'row-spearman': 'Spearman ρ (n=492)',
+      'row-spearman-val': '−0.051 <span class="ns">ns</span>',
+      'row-effect': 'Tamaño del efecto (ε²)',
+      'row-effect-val': '0.009',
+      'row-literature': 'Literatura clasificada',
+      'row-literature-val': '0 / 12 artículos',
+      'row-robustness': 'Robustez del veredicto',
+      'row-robustness-val': 'n/a - sin pruebas primarias',
+      'vr-lhs': 'RANGO<br>TARJETA<br>[en espera]',
+      'vr-title': 'Motor de diálogo VR',
+      'vr-desc': 'Entrenando y desplegando un <b>modelo específico de dominio ligero para diálogo VR en tiempo real</b> - Construido con datos sintéticos, optimizado para la inferencia en el dispositivo en visores autónomos. Actualmente en pausa. ',
+      'section-how': 'Cómo trabajo',
+      'section-how-note': 'Los hábitos detrás del resultado.',
+      'note1-title': 'Herramientas que construí para mí',
+      'note1-desc': '<b>BurnLog</b> - un analizador de un solo archivo y totalmente local para los registros de sesión de Claude Code: costo, latencia, uso de tokens y eficiencia de caché desde un <span class="mono">.jsonl</span> descargado, sin backend, sin cargas. Construido para reducir mi propio gasto antes de que fuera otra cosa.',
+      'note2-title': 'Cómo pienso en sistemas',
+      'note2-desc': 'Trabajo desde un método explícito de <b>arquitectura semántica</b> - separando razonamiento, orquestación, semántica y ejecución en capas distintas. Es por eso que BioAnalyst mantiene al modelo fuera de las matemáticas. Construyo sistemas, no scripts.',
+      'footer-cta': '¿Tienes una idea vaga que necesita <em>volverse real?</em>',
+      'footer-book': 'Reserva una llamada de 20 min <span class="arr">↗</span>',
+      'footer-meta-1': 'MARCOS · DESARROLLADOR INDIVIDUAL · BUENOS AIRES, AR',
+      'footer-meta-2': 'EN / ES · DISPONIBLE PARA CONTRATOS &amp; FREELANCE'
+    }
+  };
+
+  const translateToggle = document.getElementById('translate-toggle');
+  let isSpanish = false;
+
+  const updateText = (key, value) => {
+    const node = document.querySelector(`[data-i18n-key="${key}"]`) || document.getElementById(key);
+    if (node) node.innerHTML = value;
+  };
+
+  const setLanguage = (spanish) => {
+    isSpanish = spanish;
+    const locale = spanish ? 'es' : 'en';
+    document.documentElement.lang = locale;
+    translateToggle.textContent = spanish ? 'EN' : 'ES';
+    translateToggle.setAttribute('aria-label', spanish ? 'Switch page to English' : 'Translate page to Spanish');
+
+    Object.entries(translations[locale]).forEach(([key, value]) => {
+      updateText(key, value);
+    });
+  };
+
+  translateToggle.addEventListener('click', () => setLanguage(!isSpanish));
 </script>
 </body>
 </html>
